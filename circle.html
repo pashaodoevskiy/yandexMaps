@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Примеры. Круг</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script>
+		function openbox(id) {
+			var div = document.getElementById(id);
+			var btn = document.getElementById('btn');
+			if(div.style.display == 'none') {
+				div.style.display = 'block';
+				btn.innerHTML='Закрыть';
+				btn.style.background = '#ff5252';
+				btn.style.color = '#fff';
+			} else {
+				div.style.display = 'none';
+				btn.style.background = '#fff';
+				btn.style.color = '#333333';
+				document.getElementById('btn').innerHTML='Спарвка';
+			}
+		}
+		ymaps.ready(init);
+
+		function init() {
+
+			var myMap = new ymaps.Map("map", {
+					center: [59.94, 30.31],
+					zoom: 8
+				}, {
+					searchControlProvider: 'yandex#search'
+				});
+
+			var circles = new ymaps.GeoObjectCollection();
+
+			circles.add(new ymaps.Circle([[57.81, 28.33], 60000]))//Псков, пл. Ленина, 3 
+			circles.add(new ymaps.Circle([[61.78, 34.36], 60000]))//Петрозаводск, пр. Ленина, 21 
+			circles.add(new ymaps.Circle([[58.52, 31.26], 60000]))//Великий Новгород, Победы-Софийская площадь, 1 
+			circles.add(new ymaps.Circle([[56.86, 35.91], 60000]))//Тверь, Советская, 11 
+			circles.add(new ymaps.Circle([[53.19, 50.10], 60000]))//Самара, площадь Куйбышева,1 
+			circles.add(new ymaps.Circle([[53.50, 49.41], 60000]))//Тольятти, ул. Мира, 88
+			circles.add(new ymaps.Circle([[56.32, 44.00], 60000]))//Н.Новгород, Кремль, 6А 
+			circles.add(new ymaps.Circle([[64.54, 40.51], 60000]))//Архангельск, Троицкий проспект, 49
+			circles.add(new ymaps.Circle([[59.94, 30.31], 60000]))//Санкт-Петербург, Дворцовая площадь, 2
+			circles.add(new ymaps.Circle([[56.83, 60.60], 30000]))//Екатеринбург, проспект Ленина, 35
+			circles.add(new ymaps.Circle([[51.53, 46.03], 60000]))//Саратов, улица имени А.Н. Радищева, 39
+
+			myMap.geoObjects.add(circles);
+		}
+	</script>
+	<style>
+        html, body, #map {
+            width: 100%; height: 100%; padding: 0; margin: 0;
+        }
+		a {
+			text-decoration: none;
+		}
+		html, 
+		body,
+		#map {
+			width: 100%;
+			height: 100%; 
+			padding: 0; 
+			margin: 0;
+		}	
+		.auth {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -65.5px;
+			margin-left: -95.5px;
+		}
+		.auth div {
+			margin-top: 10px;
+		}
+		.auth input {
+			border-radius: 50px;
+			border: 1px solid gray;
+			padding: 10px;
+			outline: none;
+			text-align: center;
+		}
+		.auth div:last-child input {
+			background: none;
+			padding: 5px 10px;
+		}
+		.auth div:last-child input:hover {
+			background: #ff5252;
+			color: #fff;
+			border: 1px solid #ff5252;
+			transition: .2s linear;
+		}
+		.auth div:last-child {
+			text-align: center;	
+		}
+		#btn {
+			position: absolute;
+			z-index: 1;
+			right: 10px;
+			top: 60px;
+			border-radius: 3px;
+			background: #fff;
+			padding: 5px 10px;
+			box-shadow: 1px 1px 5px rgb(0,0,0,0.3);
+			color: #333333;
+		}
+		#box {
+			position: absolute;
+			width: 600px;
+			height: 600px;
+			top: 50%;
+			left: 50%;
+			margin-top: -305px;
+			margin-left: -305px;
+			z-index: 5;
+			background: #fff;
+			border-radius: 5px;
+			display: block;
+    		font-size: 11px;
+    		padding: 10px;
+			border: 1px solid #e8e5dc;
+		}
+		#box input {
+			display: block;
+			margin: 20px;
+			border-radius: 10px;
+			border: 1px solid #666666;
+			line-height: 15px;
+			padding: 5px;
+			outline: none;
+			background: none;
+		}
+		#box form {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -127.5px;
+			margin-left: -110.5px;
+		}
+		#box input:last-child {
+			padding: 5px 10px;
+			position: absolute;
+			left: 50%;
+			margin-left: -26px;
+		}
+		#box input:last-child:hover {
+			background: #ff5252;
+			color: #fff;
+			border: 1px solid #ff5252;
+			transition: .2s linear;
+		}
+	</style>
+</head>
+<body>
+<a href="" id="btn" onclick="openbox('box'); return false">Справка</a>
+<div id="box" style="display: none;">
+	<h5>Условие 1</h5>
+	Для регионов с центром в городах: Санкт-Петербург, Псков, Петрозаводск, Великий Новгород, Тверь, Архангельск, Самара (вкл. Тольятти), Нижний Новгород, Саратов, Ульяновск, Челябинск, Белгород.<br>
+	1.Постоянная регистрация: в городе или в соответствующей области (субъекте РФ) присутствия Компании.<br>
+	2.Проживание: в городе или области (субъекте РФ) присутствия Компании - в радиусе не более 60 км от географического центра соответствующего города (здесь и далее - согласно источнику Яндекс.Карты).<br>
+	3.Работодатель: в городе или области (субъекте РФ) присутствия Компании - в радиусе не более 60 км от географического центра соответствующего города.
+	<h5>Условие 2</h5>
+	Екатеринбург или Свердловская область<br>
+	1.Постоянная регистрация: Екатеринбург или Свердловская область.<br>
+	2.Проживание, работодатель: в радиусе не более 30 км от географического центра Екатеринбурга.
+	<h5>Условие 3</h5>
+	Для регионов с центром в городах: Воронеж, Нижний Тагил.<br>
+	1.Постоянная регистрация, проживание, работодатель: в городе или области (субъекте РФ) присутствия Компании - в радиусе не более 60 км от географического центра соответствующего города.
+	<h5>Условие 4</h5>
+	Калининград и Калининградская область.<br>
+	1.Постоянная регистрация, проживание: в радиусе не более 10 км от географического центра Калининграда.
+	2.Работодатель: в радиусе не более 30 км от географического центра Калининграда.
+	<h5>Условие 5</h5>
+	Для городов:<br>
+	- Сосновый Бор Ленинградской области,<br> 
+	- Димитровград Ульяновской области,<br> 
+	- Семенов Нижегородской области,<br> 
+	- Петровск Саратовской области.<br>
+	Постоянная регистрация, проживание, работодатель: в пределах территории города.
+	<h5>Условие 6</h5>
+	Другие города присутствия Компании.<br>
+	1.Постоянная регистрация, проживание: в пределах территории города.<br>
+	Работодатель: в городе или области (субъекте РФ) присутствия Компании - в радиусе не более 30 км от географического центра соответствующего города.
+</div>
+<div id="map"></div>
+</body>
+</html>
